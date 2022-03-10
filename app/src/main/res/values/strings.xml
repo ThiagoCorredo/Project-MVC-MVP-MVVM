@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Project MVC-MVP-MVVM</string>
+    <string name="label_username">CPF</string>
+    <string name="label_password">Senha</string>
+    <string name="label_login">Entrar</string>
+    <string name="label_get_int">Entrar</string>
+    <string name="repository_without_license">Repositório sem licença</string>
+</resources>
