@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tcorredo.projectmvc_mvp_mvvm.R
 import com.tcorredo.projectmvc_mvp_mvvm.databinding.ItemListRepositoryBinding
-import com.tcorredo.projectmvc_mvp_mvvm.model.Repository
+import com.tcorredo.projectmvc_mvp_mvvm.data.model.Repository
 import com.tcorredo.projectmvc_mvp_mvvm.utils.ImageUtils
 
 class RepositoryAdapter :

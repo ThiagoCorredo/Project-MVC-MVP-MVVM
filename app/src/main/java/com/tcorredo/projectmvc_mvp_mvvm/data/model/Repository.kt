@@ -1,4 +1,4 @@
-package com.tcorredo.projectmvc_mvp_mvvm.model
+package com.tcorredo.projectmvc_mvp_mvvm.data.model
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil

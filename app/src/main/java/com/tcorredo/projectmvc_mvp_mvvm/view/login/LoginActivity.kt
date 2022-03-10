@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tcorredo.projectmvc_mvp_mvvm.databinding.ActivityLoginBinding
 import com.tcorredo.projectmvc_mvp_mvvm.view.repository.RepositoryActivity
 
-class LoginMvcActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
