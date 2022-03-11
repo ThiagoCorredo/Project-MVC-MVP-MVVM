@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcorredo.projectmvc_mvp_mvvm.controller.BaseApi
 import com.tcorredo.projectmvc_mvp_mvvm.databinding.ActivityRepositoryBinding
+import com.tcorredo.projectmvc_mvp_mvvm.model.ItemsResponse
+import com.tcorredo.projectmvc_mvp_mvvm.model.Repository
 import com.tcorredo.projectmvc_mvp_mvvm.view.repository.adapter.RepositoryAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RepositoryActivity : AppCompatActivity() {
 
@@ -32,23 +32,26 @@ class RepositoryActivity : AppCompatActivity() {
         getRepositories()
     }
 
-    fun getRepositories() {
+    private fun getRepositories() {
         val service = BaseApi.createEndpoint()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getRepositories()
-            withContext(Dispatchers.Main) {
-                try {
-                    adapter.submitList(response.items)
-                } catch (exception: HttpException) {
-                    showMessage(exception.response()?.code().toString())
-                } catch (exception: Throwable) {
-                    showMessage("Erro desconhecido")
-                }
+
+        val callback = service.getRepositories()
+
+        callback.enqueue(object : Callback<ItemsResponse<Repository>> {
+            override fun onFailure(call: Call<ItemsResponse<Repository>>, throwable: Throwable) {
+                showMessage(throwable.message)
             }
-        }
+
+            override fun onResponse(
+                call: Call<ItemsResponse<Repository>>,
+                response: Response<ItemsResponse<Repository>>
+            ) {
+                adapter.submitList(response.body()?.items)
+            }
+        })
     }
 
-    private fun showMessage(message: String) {
+    private fun showMessage(message: String?) {
         Toast.makeText(
             this,
             "Error network operation failed with $message",
